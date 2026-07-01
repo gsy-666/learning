@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.MachineControl" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#0E1116</item>
+        <item name="colorPrimaryDark">#0E1116</item>
+        <item name="colorAccent">#2F81F7</item>
+    </style>
+</resources>

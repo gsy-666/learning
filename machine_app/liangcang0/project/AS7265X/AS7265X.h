@@ -1,0 +1,117 @@
+#ifndef _AS7265X_H_
+#define _AS7265X_H_
+
+#include <stdbool.h>
+#include <stdint.h>
+
+// Default I2C device node for RK3568; change if your bus differs.
+#define AS7265X_I2C_DEV "/dev/i2c-3"
+
+#define AS7265X_I2CADDR 0x49
+
+#define I2C_AS72XX_SLAVE_STATUS_REG 0x00
+#define I2C_AS72XX_SLAVE_WRITE_REG  0x01
+#define I2C_AS72XX_SLAVE_READ_REG   0x02
+#define I2C_AS72XX_SLAVE_TX_VALID   0x02
+#define I2C_AS72XX_SLAVE_RX_VALID   0x01
+
+#define AS7265X_REG_HWVERSION_H    0x00
+#define AS7265X_REG_HWVERSION_L    0x01
+#define AS7265X_REG_FWVERSION_H    0x02
+#define AS7265X_REG_FWVERSION_L    0x03
+#define AS7265X_REG_CONFIGURATION    0x04
+#define AS7265X_REG_INTEGRATIONTIME    0x05
+#define AS7265X_REG_TEMPERATURE    0x06
+#define AS7265X_REG_LEDCONFIGURATION    0x07
+#define AS7265X_REG_RAW_RGA_H	0x08
+#define AS7265X_REG_RAW_RGA_L	0x09
+#define AS7265X_REG_RAW_SHB_H	0x0A
+#define AS7265X_REG_RAW_SHB_L	0x0B
+#define AS7265X_REG_RAW_TIC_H	0x0C
+#define AS7265X_REG_RAW_TIC_L	0x0D
+#define AS7265X_REG_RAW_UJD_H	0x0E
+#define AS7265X_REG_RAW_UJD_L	0x0F
+#define AS7265X_REG_RAW_VKE_H	0x10
+#define AS7265X_REG_RAW_VKE_L	0x11
+#define AS7265X_REG_RAW_WLF_H	0x12
+#define AS7265X_REG_RAW_WLF_L	0x13
+#define AS7265X_REG_CAL_RGA_C0	0X14
+#define AS7265X_REG_CAL_RGA_C1	0X15
+#define AS7265X_REG_CAL_RGA_C2	0X16
+#define AS7265X_REG_CAL_RGA_C3	0X17
+#define AS7265X_REG_CAL_SHB_C0	0X18
+#define AS7265X_REG_CAL_SHB_C1	0X19
+#define AS7265X_REG_CAL_SHB_C2	0X1A
+#define AS7265X_REG_CAL_SHB_C3	0X1B
+#define AS7265X_REG_CAL_TIC_C0	0X1C
+#define AS7265X_REG_CAL_TIC_C1	0X1D
+#define AS7265X_REG_CAL_TIC_C2	0X1E
+#define AS7265X_REG_CAL_TIC_C3	0X1F
+#define AS7265X_REG_CAL_UJD_C0	0X20
+#define AS7265X_REG_CAL_UJD_C1	0X21
+#define AS7265X_REG_CAL_UJD_C2	0X22
+#define AS7265X_REG_CAL_UJD_C3	0X23
+#define AS7265X_REG_CAL_VKE_C0	0X24
+#define AS7265X_REG_CAL_VKE_C1	0X25
+#define AS7265X_REG_CAL_VKE_C2	0X26
+#define AS7265X_REG_CAL_VKE_C3	0X27
+#define AS7265X_REG_CAL_WLF_C0	0X28
+#define AS7265X_REG_CAL_WLF_C1	0X29
+#define AS7265X_REG_CAL_WLF_C2	0X2A
+#define AS7265X_REG_CAL_WLF_C3	0X2B
+#define AS7265X_REG_FWCONTROL	0x048
+#define AS7265X_REG_FWBYTECOUNT_H 0x49
+#define AS7265X_REG_FWBYTECOUNT_L 0x4A
+#define AS7265X_REG_FWPAYLOAD 0x4B
+#define AS7265X_REG_DEVSEL 0x4F
+#define AS7265X_REG_COEF_DATA_0	0x50
+#define AS7265X_REG_COEF_DATA_1	0x51
+#define AS7265X_REG_COEF_DATA_2	0x52
+#define AS7265X_REG_COEF_DATA_3	0x53
+#define AS7265X_REG_COEF_READ	0x54
+#define AS7265X_REG_COEF_WRITE	0x55
+
+#define AS7265X_LED_DRV_ENABLE    0x08
+#define AS7265X_LED_DRV_DISABLE    0x00
+#define AS7265X_LED_DRV_12_5MA  0x00
+#define AS7265X_LED_DRV_25MA    0x10
+#define AS7265X_LED_DRV_50MA    0x20
+#define AS7265X_LED_DRV_100MA   0x30
+
+#define AS7265X_LED_IND_ENABLE    0x01
+#define AS7265X_LED_IND_DISABLE    0x00
+#define AS7265X_LED_IND_1MA     0x00
+#define AS7265X_LED_IND_2MA     0x01
+#define AS7265X_LED_IND_4MA     0x04
+#define AS7265X_LED_IND_8MA     0x06
+
+#define AS7265X_SELECT_AS72651	0x00
+#define AS7265X_SELECT_AS72652	0x01
+#define AS7265X_SELECT_AS72653	0x02
+
+#define AS7265X_GAIN_1X 0x00
+#define AS7265X_GAIN_3_7X 0x10
+#define AS7265X_GAIN_16X 0x20
+#define AS7265X_GAIN_64X 0x30
+
+#define AS7265X_MEASUREMENT_MODE0 0x00
+#define AS7265X_MEASUREMENT_MODE1 0x04
+#define AS7265X_MEASUREMENT_MODE2 0x08
+#define AS7265X_MEASUREMENT_MODE3 0x0c
+
+bool AS7265X_Init(void);
+float AS7265X_Get_Temperature(uint8_t hw);
+void AS7265X_Set_LED(uint8_t hw, uint8_t value);
+void AS7265X_Set_Interrupt(bool mode);
+void AS7265X_Set_Measurement(uint8_t value);
+void AS7265X_Set_Gain(uint8_t value);
+void AS7265X_Set_Integration(uint8_t value);
+bool AS7265X_Get_DataStatus(void );
+bool AS7265X_Get_DataStatus_Device(uint8_t devsel);
+bool AS7265X_Get_DataStatus_Debug(uint8_t *status_out, size_t len);
+void AS7265X_Set_Measurement_Device(uint8_t devsel, uint8_t value);
+bool AS7265X_Wait_DataReady(uint8_t devsel, unsigned int timeout_ms);
+void AS7265X_Get_Channel_Raw(uint16_t * value);
+void AS7265X_Get_Calibrated(float* value);
+void AS7265X_i2cm_AS72xx_write(uint8_t virtualReg, uint8_t d);
+#endif //_AS7265X_H_

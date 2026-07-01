@@ -1,0 +1,18 @@
+# Android build artifacts
+machine_app/android/app/build/
+machine_app/android/.gradle/
+machine_app/android/build/
+machine_app/android/captures/
+machine_app/android/.externalNativeBuild/
+machine_app/android/local.properties
+
+# Kotlin error logs
+machine_app/android/.kotlin/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
